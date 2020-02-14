@@ -1,43 +1,57 @@
 package tang.testjava;
 
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
 
-public class MyWindow extends JFrame {
+class MyWindow extends JFrame {
+
+    protected JPanel buttonsPanel;
+    protected JButton okButton = new JButton("OK");
+    protected JButton cancleButton = new JButton("Cancel");
+
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
-    JPanel buttonsPanel;
-    JButton okButton, cancelButton;
-    public MyWindow(String title) {
-        super(title);
-    }
-    public void setFrameFeatures() {
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-    public void addComponents() {
+    protected void addComponents() {
         buttonsPanel = new JPanel();
-        okButton = new JButton("OK");
-        cancelButton = new JButton("Cancel");
-        buttonsPanel.setLayout(new FlowLayout());
         buttonsPanel.add(okButton);
-        buttonsPanel.add(cancelButton);
+        buttonsPanel.add(cancleButton);
     }
+
+    protected void setFrameFeatures() {
+        super.setLocationRelativeTo(null);
+        super.setVisible(true);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.add(buttonsPanel, BorderLayout.SOUTH);
+        super.pack();
+    
+    }
+
+    private static final long serialVersionUID = 1L;
+
+    public MyWindow(String charl) {
+        super(charl);
+        buttonsPanel = new JPanel();
+        setLayout(new BorderLayout());
+    }
+
     public static void createAndShowGUI() {
-        MyWindow window = new MyWindow("GUI Test");
-        window.addComponents();
-        window.setFrameFeatures(); 
+        MyWindow msw = new MyWindow("My Simple Window");
+        msw.addComponents();
+        msw.setFrameFeatures();
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
+
+    public static void main(String[] args) { 
+        SwingUtilities.invokeLater(new Runnable() { 
+            public void run() { 
+                createAndShowGUI(); 
             }
         });
-    }
+    } 
+    
 }
+
